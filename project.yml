@@ -1,0 +1,70 @@
+name: LDBRemote
+
+options:
+  bundleIdPrefix: com.ldiazbusquets
+  deploymentTarget:
+    iOS: "18.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.10"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: ""
+    ENABLE_PREVIEWS: YES
+
+targets:
+  LDBRemote:
+    type: application
+    platform: iOS
+    sources:
+      - App
+      - Shared
+    scheme: {}
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ldiazbusquets.ldbremote
+        TARGETED_DEVICE_FAMILY: "1,2"
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: LDB Remote
+        UILaunchScreen:
+          UIColorName: ""
+        NSLocalNetworkUsageDescription: LDB Remote connects your iPhone and iPad over your Wi-Fi.
+        NSBonjourServices:
+          - _ldbremote._tcp
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UIStatusBarStyle: UIStatusBarStyleLightContent
+    dependencies:
+      - target: LDBRemoteWidgets
+
+  LDBRemoteWidgets:
+    type: app-extension
+    platform: iOS
+    sources:
+      - Widgets
+      - Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ldiazbusquets.ldbremote.widgets
+        TARGETED_DEVICE_FAMILY: "1,2"
+    info:
+      path: Widgets/Info.plist
+      properties:
+        CFBundleDisplayName: LDB Remote
+        NSLocalNetworkUsageDescription: LDB Remote connects your iPhone and iPad over your Wi-Fi.
+        NSBonjourServices:
+          - _ldbremote._tcp
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
